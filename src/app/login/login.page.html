@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="light" mode="ios">
+        <ion-title>login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-slides>
+        <ion-slide *ngFor="let picture of pictures">
+            <img [src]="picture" />
+        </ion-slide>
+    </ion-slides>
+    <div class="menu">
+        <ion-grid>
+            <ion-row class="ingresar">
+                <ion-icon name="mail"></ion-icon>
+                <ion-input [(ngModel)]="user.email" type="email" placeholder="mail"></ion-input>
+            </ion-row>
+            <ion-row color="light" class="ingresar">
+                <ion-icon name="key"></ion-icon>
+                <ion-input [(ngModel)]="user.password" type="password" placeholder="password"></ion-input>
+            </ion-row>
+        </ion-grid>
+        <ion-button (click)="entrar()" shape="round" expand="block">Entrar</ion-button>
+        <ion-button (click)="registrar()" expand="block" color="primary" fill="clear">Haven't account? Sign in</ion-button>
+
+    </div>
+</ion-content>

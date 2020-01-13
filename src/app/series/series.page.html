@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar color="dark" mode="ios">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title style="letter-spacing: 2em;">SERIES</ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div>
+        <ion-card *ngFor="let serie of series; let x=index">
+            <ion-card-content>
+                <img class="imagenes" *ngIf="serie.url" [src]="serie.url">
+                <p style="opacity: 1; font-size: 20px; text-align: center; color: #000000; padding:20px 10px 10px 20px;">
+                    {{serie.description}}
+                </p>
+                <!--
+
+                -->
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+    <ion-fab *ngIf="platform.is('cordova')" vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button (click)="push_funtions()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <ion-fab *ngIf="!platform.is('cordova')" vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button (click)="push_funtions()">
+            <ion-icon name="add"></ion-icon>
+            <ion-input type="file" (change)="push_funtions($event)" style=" position: absolute; top: 0; height: 100%; opacity: 0;"></ion-input>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

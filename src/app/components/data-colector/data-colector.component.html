@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-button (click)="close()">
+                <ion-icon name="arrow-round-back" mode="md"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button *ngIf="!platform.is('cordova')">
+                <ion-icon name="image" mode="md"></ion-icon>
+                <ion-input type="file" (change)="changeListener($event)" style=" position: absolute; top: 0; height: 70%; opacity: 0;" multiple></ion-input>
+            </ion-button>
+            <ion-button *ngIf="platform.is('cordova')" (click)="add_imagen()">
+                <ion-icon name="image" mode="md"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-card>
+        <img width="200px" *ngIf="imagen" [src]="imagen">
+        <ion-card-content>
+            <ion-card-title style="color: #454444;" text-center>Agrega una descripción</ion-card-title>
+            <br>
+            <ion-item>
+                <ion-textarea #data clearOnEdit="true" placeholder="comentar"></ion-textarea>
+            </ion-item>
+            <ion-button (click)="push_content(data.value)" expand="block" shape="round">Enviar</ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

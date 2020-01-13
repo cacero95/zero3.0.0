@@ -1,0 +1,27 @@
+@media(min-width:200px) {
+    .imagenes {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+    }
+    .parrafos {
+        margin: 0 0;
+    }
+}
+
+@media(min-width:600px) {
+    .imagenes {
+        width: 400px;
+        height: 400px;
+        margin: auto;
+    }
+    .parrafos {
+        margin: 0 100px;
+    }
+}
+
+@media(min-width:1000px) {
+    .parrafos {
+        margin: 0 200px 0 200px;
+    }
+}

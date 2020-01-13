@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar mode="ios" color="light">
+        <ion-title>What will be your account?</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row class="ingresar">
+            <ion-icon name="contact"></ion-icon>
+            <ion-input #name type="text" placeholder="Name"></ion-input>
+        </ion-row>
+        <ion-row class="ingresar">
+            <ion-icon name="mail"></ion-icon>
+            <ion-input #mail type="email" placeholder="Mail"></ion-input>
+        </ion-row>
+        <ion-row class="ingresar">
+            <ion-icon name="key"></ion-icon>
+            <ion-input #password type="password" placeholder="Password"></ion-input>
+        </ion-row>
+
+        <ion-button (click)="signIn(name.value,mail.value,password.value)" shape="round" expand="block">Sign In</ion-button>
+        <ion-button (click)="close()" expand="block" color="primary" fill="clear">You have your account</ion-button>
+    </ion-grid>
+</ion-content>

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./share-content.page.scss'],
 })
 export class ShareContentPage implements OnInit {
-
+  change_content = 0;
   constructor() { }
 
   ngOnInit() {

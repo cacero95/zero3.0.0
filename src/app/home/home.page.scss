@@ -7,6 +7,15 @@
     .parrafos {
         margin: 0 0;
     }
+    audio {
+        width: 100%;
+    }
+}
+
+@media(min-width:400px) {
+    audio {
+        width: 300px;
+    }
 }
 
 @media(min-width:600px) {
@@ -18,14 +27,16 @@
     .parrafos {
         margin: 0 100px;
     }
+    audio {
+        width: 500px;
+    }
 }
 
 @media(min-width:1000px) {
     .parrafos {
         margin: 0 400px 0 400px;
     }
-}
-
-.border {
-    border-bottom: 4px solid #20A9B2;
+    audio {
+        width: 500px;
+    }
 }

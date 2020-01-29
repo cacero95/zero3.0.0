@@ -9,6 +9,21 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-slides pager=true [options]="slideOpts" class="swiper-container">
+        <ion-slide class="swiper-slide" *ngFor="let serie of series; let x = index">
+
+            <img class="imagenes" [src]="serie.url">
+            <div>
+                <h3> {{serie.titulo}} </h3>
+                <p style="opacity: 1; font-size: 20px; text-align: center; color: #000000; padding:20px 10px 10px 20px;">
+
+                    <span>{{serie.description}}</span>
+                </p>
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <!--
+        
     <div>
         <ion-card *ngFor="let serie of series; let x=index">
             <ion-card-content>
@@ -16,22 +31,14 @@
                 <p style="opacity: 1; font-size: 20px; text-align: center; color: #000000; padding:20px 10px 10px 20px;">
                     {{serie.description}}
                 </p>
-                <!--
-
-                -->
             </ion-card-content>
         </ion-card>
 
     </div>
-    <ion-fab *ngIf="platform.is('cordova')" vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button (click)="push_funtions()">
+    -->
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="danger" (click)="push_funtions()">
             <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
-    <ion-fab *ngIf="!platform.is('cordova')" vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button (click)="push_funtions()">
-            <ion-icon name="add"></ion-icon>
-            <ion-input type="file" (change)="push_funtions($event)" style=" position: absolute; top: 0; height: 100%; opacity: 0;"></ion-input>
         </ion-fab-button>
     </ion-fab>
 </ion-content>

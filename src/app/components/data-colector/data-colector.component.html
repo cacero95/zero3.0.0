@@ -20,12 +20,15 @@
     <ion-card>
         <img width="200px" *ngIf="imagen" [src]="imagen">
         <ion-card-content>
-            <ion-card-title style="color: #454444;" text-center>Agrega una descripción</ion-card-title>
+            <ion-card-title style="color: #454444;" text-center>Titulo</ion-card-title>
             <br>
+            <ion-item>
+                <ion-input #title type="text" placeholder="Titulo"></ion-input>
+            </ion-item>
             <ion-item>
                 <ion-textarea #data clearOnEdit="true" placeholder="comentar"></ion-textarea>
             </ion-item>
-            <ion-button (click)="push_content(data.value)" expand="block" shape="round">Enviar</ion-button>
+            <ion-button fill="outline" expand="block" (click)="push_content(title.value, data.value)" shape="round">Enviar</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

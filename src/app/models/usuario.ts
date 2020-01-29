@@ -4,6 +4,7 @@ export interface Usuario {
     name:string;    
 }
 export interface Upload_content {
+    titulo:string;
     name:string;
     description:string;
     url:string;

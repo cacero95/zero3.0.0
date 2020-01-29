@@ -11,8 +11,8 @@
 
 @media(min-width:600px) {
     .imagenes {
-        width: 400px;
-        height: 400px;
+        width: 250px;
+        height: 250px;
         margin: auto;
     }
     .parrafos {
@@ -24,4 +24,25 @@
     .parrafos {
         margin: 0 200px 0 200px;
     }
+}
+
+.imagenes:hover {
+    cursor: pointer;
+}
+
+ion-content {
+    --background: #525150;
+}
+
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    display: block;
 }

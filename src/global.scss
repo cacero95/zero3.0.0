@@ -12,6 +12,10 @@
 
 /* Core CSS required for Ionic components to work properly */
 
+.border {
+    border-bottom: 3px solid steelblue;
+}
+
 .ingresar {
     padding-left: 10px;
     border: 1px solid #000000;
@@ -36,6 +40,18 @@
     }
 }
 
+.letter-spacing {
+    @media(min-widht: 600px) {
+        letter-spacing: 2em;
+    }
+    @media(min-width: 1000px) {
+        letter-spacing: 2em;
+    }
+    @media(min-width: 200px) {
+        letter-spacing: 1em;
+    }
+}
+
 .collection {
     @media(min-width: 0px) {
         column-count: 1;
@@ -57,7 +73,7 @@
     border-radius: 12px;
     cursor: zoom-in;
     img {
-        border-radius: 12px;
+        border-radius: 0 0 12px 12px;
     }
     ion-button {
         display: none;

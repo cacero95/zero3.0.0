@@ -1,9 +1,33 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>share_content</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="dark" mode="ios">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Compartir</ion-title>
+    </ion-toolbar>
+    <ion-toolbar mode="ios">
+        <ion-tabs>
+            <ion-tab-bar slot="top">
+                <ion-tab-button [ngClass]="{'border': change_content==0}" tab="publicar" (click)="change_content = 0;">
+                    <ion-label>Nuevo</ion-label>
+                </ion-tab-button>
+                <ion-tab-button [ngClass]="{'border': change_content==1}" tab="comentario" (click)="change_content = 1;">
+                    <ion-label>Comentarios</ion-label>
+                </ion-tab-button>
+            </ion-tab-bar>
+        </ion-tabs>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <section *ngIf="change_content == 0">
+        <video src="assets/Yugioh - Seto Kaiba You're Not Me.mp4" muted autoplay="" loop=""></video>
+        <div class="box">
+            <div>
+                <span> <video src="assets/Yugioh - Seto Kaiba You're Not Me.mp4" autoplay="" loop="" muted></video></span>
+                <span> <video src="assets/Yugioh - Seto Kaiba You're Not Me.mp4" autoplay="" loop="" muted></video></span>
+                <span> <video src="assets/Yugioh - Seto Kaiba You're Not Me.mp4" autoplay="" loop="" muted></video></span>
+            </div>
+        </div>
+    </section>
 </ion-content>

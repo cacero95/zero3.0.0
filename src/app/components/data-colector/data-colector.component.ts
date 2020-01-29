@@ -19,7 +19,8 @@ export class DataColectorComponent implements OnInit {
     private modal:ModalController,
     private dba:DbaService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async add_imagen(){
 
@@ -55,35 +56,26 @@ export class DataColectorComponent implements OnInit {
     });
     alert.present();
   }
-  push_content(data){
+  push_content(title,data){
     this.upload.description = data;
-    console.log(this.upload);
-    if (this.platform.is('cordova')){
-      this.dba.add_imageToStorage(this.upload).then((response)=>{
-        console.log(response);
-        if(response == true){
-          this.close();
-        }
-      })
-    }
-    else {
-      this.dba.upload_web_content('imagenes', this.upload).then((res)=>{
-        console.log(res);
-        if(res == true){
-          this.close();
-        }
-      })
-    }
-    
-    
+    this.upload.titulo = title;
+    this.close(this.upload);
   }
   changeListener(event){
-
     this.upload["archivos"] = event.target.files;
-    this.upload.name = new Date().valueOf().toString(); 
-    
+    this.upload.name = new Date().valueOf().toString();
   }
-  close(){
-    this.modal.dismiss();
+  close(value?:any){
+    if(value){
+      // retorna el objeto que se subira firebase
+      this.modal.dismiss(
+        {
+          'return':value
+        }
+      )
+    }
+    else{
+      this.modal.dismiss();
+    }
   }
 }

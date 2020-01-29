@@ -9,7 +9,7 @@
         <ion-buttons *ngIf="status == 1" slot="end">
             <ion-button>
                 <ion-icon name="add"></ion-icon>
-                <ion-input type="file" (change)="changeListener($event)" style=" position: absolute; top: 0; height: 70%; opacity: 0;" multiple></ion-input>
+                <ion-input type="file" (change)="changeListener($event)" style="position: absolute; top: 0; height: 70%; opacity: 0;" multiple></ion-input>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -26,7 +26,7 @@
 <ion-content padding>
     <ion-card style="margin-bottom: 50px;">
         <ion-card-header>
-            <ion-card-title style="letter-spacing: 2em; padding-bottom: 10px;" text-center> {{toolbar[status].title}} </ion-card-title>
+            <ion-card-title class="letter_spacing" style="padding-bottom: 10px; font-weight: 400px;" text-center> <strong>{{toolbar[status].title}}</strong> </ion-card-title>
         </ion-card-header>
         <ion-card-content style="padding-bottom:100px" text-center *ngIf="toolbar[status].content">
             <div style="text-align: center;">
@@ -38,7 +38,7 @@
                 <div style="padding-right:80px;" *ngFor="let music of toolbar[1].content.list">
 
                 </div>
-                <ion-item (click)="change_song(music.url)" detail *ngFor="let music of toolbar[1].content.list">
+                <ion-item (click)="change_song(music.url, x)" detail *ngFor="let music of toolbar[1].content.list; let x = index">
                     <ion-label>{{music.name}}</ion-label>
                 </ion-item>
             </div>
@@ -46,8 +46,8 @@
                 <div class="collection-item" text-center *ngFor="let img of toolbar[2].content.list">
                     <ion-button>
                         <ion-icon name="bookmark" slot="start"></ion-icon>
-                        GAME
                     </ion-button>
+                    <h3 style="background: #525150; color: #ffffff; padding:10px 0; border-radius: 10px 10px 0 0;" *ngIf="img.titulo"> {{img.titulo}} </h3>
                     <img [src]="img.url" alt=""><br>
                     <p style="color: #000000; border:1px solid #000000; padding:5px; border-radius: 4px;">{{img.description}}</p>
                 </div>
@@ -62,8 +62,31 @@
 
 </ion-content>
 <ion-footer>
-    <ion-toolbar *ngIf="status == 1" padding>
-        <audio id="reproductor" [src]="current_song" *ngIf="toolbar[1].content.list.length > 0" id="reproductor" width="100%" controls>
-        </audio>
+    <ion-toolbar mode="ios" *ngIf="status == 1 && toolbar[1].content.list.length > 0" padding>
+        <div style="border-radius:0 0 10px 10px; background:#282828; display: flex;margin: auto; align-items: center; justify-content: center;">
+            <div (click)="start_music()" style="display:block">
+                <div style="width:100%; display: flex; justify-content: center;">
+                    <ion-button (click)="previous_song()" fill="clear">
+                        <ion-icon mode="md" size="large" color="light" name="rewind"></ion-icon>
+                    </ion-button>
+                    <ion-button (click)="play_music()" fill="clear">
+                        <div *ngIf="play">
+                            <ion-icon *ngIf="play.paused" mode="md" size="large" color="light" name="play-circle"></ion-icon>
+                            <ion-icon *ngIf="!play.paused" mode="md" size="large" color="light" name="pause"></ion-icon>
+                        </div>
+                        <div *ngIf="!play">
+                            <ion-icon mode="md" size="large" color="light" name="play-circle"></ion-icon>
+                        </div>
+                    </ion-button>
+                    <ion-button (click)="next_song()" fill="clear">
+                        <ion-icon size="large" color="light" mode="md" name="fastforward"></ion-icon>
+                    </ion-button>
+                </div>
+
+                <audio controls id="reproductor" id="reproductor" controls>
+                    <source *ngFor="let song of toolbar[1].content.list" [src]="song.url">
+                </audio>
+            </div>
+        </div>
     </ion-toolbar>
 </ion-footer>

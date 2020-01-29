@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { AlertController, ToastController, LoadingController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController, Platform } from '@ionic/angular';
 import { Usuario, Upload_content } from '../models/usuario';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,24 @@ import { HttpClient } from '@angular/common/http';
 export class DbaService {
 
   user:firebase.User;
-  constructor(private alert:AlertController,
+  constructor(private platform:Platform,
     private toast:ToastController,
     private http:HttpClient,
+    private storage:Storage,
     private firedba:AngularFireDatabase,
     private loading:LoadingController) { }
 
-
+  get_user_storage():Promise<any>{
+    return this.storage.get('usuario');
+  }
   login(usuario:Usuario):Promise<any>{
     return new Promise((resolve,reject)=>{
       firebase.auth().signInWithEmailAndPassword(usuario.email,usuario.password)
       .then((usuario:any)=>{
-        console.log(usuario);
         let us:firebase.User = usuario.user;
+        if(this.platform.is('cordova')){
+          this.storage.set('usuario',us);
+        }
         this.showAlert(`Welcome ${us.displayName}`,"success");
         resolve(true);     
       }).catch(err=>{
@@ -103,11 +109,15 @@ export class DbaService {
       }
     })
   }
+  prueba(){
+    console.log('funciona');
+  }
   upload_web_content(path, contenido):Promise<any>{
     console.log(contenido);
     // en contenido.archivo viene el contenido del la imagen que se va a cargar
     let content:Upload_content = {
       name:contenido.name,
+      titulo:contenido.titulo,
       description:contenido.description,
       url:""
     }
@@ -184,14 +194,13 @@ export class DbaService {
       })
     })
   }
-  add_imageToStorage(contenido:Upload_content):Promise<any> {
+  add_imageToStorage(path, contenido:Upload_content):Promise<any> {
     
     return new Promise((resolve,reject)=>{
       
       let ref = firebase.storage().ref();
           let uploadTask:firebase.storage.UploadTask = ref.child(`imagenes/${contenido.name}`)
           .putString(contenido.url, 'base64',{contentType: 'image/jpeg'});
-          console.log(uploadTask);
           uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             async(percentaje)=>{
 
@@ -210,14 +219,14 @@ export class DbaService {
               this.showAlert(`${err.message}`,'danger');
               reject(false);
             },()=>{
-              ref.child(`imagenes/${contenido.name}`).getDownloadURL().then((url)=>{
+              ref.child(`${path}/${contenido.name}`).getDownloadURL().then((url)=>{
                 let picture = new Object();
                 picture = {
                   name:contenido.name,
                   description:contenido.description,
                   url
                 }
-                this.firedba.object(`imagenes/${contenido.name}`).update(picture).then(()=>{
+                this.firedba.object(`${path}/${contenido.name}`).update(picture).then(()=>{
                   this.showAlert(`up!`, 'success');
                   resolve(true);
                 }).catch(()=>{

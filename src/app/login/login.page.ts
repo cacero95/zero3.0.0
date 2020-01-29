@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DbaService } from '../services/dba.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -17,27 +18,37 @@ export class LoginPage implements OnInit {
 
   user = {} as Usuario;
   pictures = [
-    'assets/img/last_of_us.png',
     'assets/img/kobe.png',
     'assets/img/controller.png'
   ]
   constructor(private dba:DbaService,
     private router:Router,
     private modal:ModalController,
-    private auth:AngularFireAuth) { }
+    private auth:AngularFireAuth,
+    private storage:Storage) { }
 
   ngOnInit() {
-    this.auth.authState.subscribe((usuario)=>{
+    this.dba.get_user_storage().then((us)=>{
+      if(us){
+        this.navegar('menu/home');
+      }
+    })
+    /**
+     * this code move recognise if the user is login on the firebase server
+     * but for reasons of privacy corps the server doesn't provide access to
+     * clients without certificate
+     * this.auth.authState.subscribe((usuario)=>{
       if(usuario.email){
         this.dba.sent_notifications({
           title:'Ingreso',
           body:'Sign in Success!!'
         }).then((output)=>{
           console.log(output)
-          this.router.navigate(['menu/home']);
+          this.navegar('menu/home');
         })
       }
     })
+     */
   }
   entrar() {
     this.dba.login(this.user).then((respuesta)=>{

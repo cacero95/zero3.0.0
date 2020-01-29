@@ -22,6 +22,10 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { DataColectorComponent } from './components/data-colector/data-colector.component';
 import { VisualSeriesComponent } from './components/visual-series/visual-series.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DbaService } from './services/dba.service';
+import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAFZM0alQjAav-AxG7i4mCJ5r6iw7FlTlY",
@@ -44,11 +48,14 @@ firebase.analytics();
     AngularFireAuthModule,
     HttpClientModule,
      IonicModule.forRoot(),
-      AppRoutingModule],
+     IonicStorageModule.forRoot(),
+     AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
+    DbaService,
+    StreamingMedia,
     FirebaseAnalytics,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

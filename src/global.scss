@@ -16,17 +16,6 @@
     border-bottom: 3px solid steelblue;
 }
 
-.ingresar {
-    padding-left: 10px;
-    border: 1px solid #000000;
-    border-radius: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    ion-icon {
-        margin: auto 8px;
-    }
-}
-
 @media(min-width:100px) {
     .textos_justificados {
         text-align: justify;
@@ -41,14 +30,14 @@
 }
 
 .letter-spacing {
-    @media(min-widht: 600px) {
+    @media(min-width: 300px) {
+        letter-spacing: 0.5em;
+    }
+    @media(min-width: 600px) {
         letter-spacing: 2em;
     }
     @media(min-width: 1000px) {
         letter-spacing: 2em;
-    }
-    @media(min-width: 200px) {
-        letter-spacing: 1em;
     }
 }
 

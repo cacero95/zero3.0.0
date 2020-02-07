@@ -18,8 +18,8 @@ export class LoginPage implements OnInit {
 
   user = {} as Usuario;
   pictures = [
-    'assets/img/kobe.png',
-    'assets/img/controller.png'
+    'assets/img/basket_ball.png',
+    'assets/img/ps4_controller.png'
   ]
   constructor(private dba:DbaService,
     private router:Router,
